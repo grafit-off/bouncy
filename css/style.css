@@ -336,7 +336,7 @@ body {
 .nav__logo {
   position: relative;
   z-index: 3;
-  padding-bottom: 5px;
+  padding-bottom: 10px;
   text-transform: uppercase;
 }
 
