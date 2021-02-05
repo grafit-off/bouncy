@@ -417,6 +417,7 @@ body {
 
   .nav__logo {
     padding-left: 15px;
+    padding-bottom: 0;
   }
 
   .nav__burger {
