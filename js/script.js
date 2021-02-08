@@ -16,60 +16,63 @@ testWebP(function (support) {
 	}
 });
 // Burger
-const nav__burger = document.querySelector('.nav__burger');
-const nav__menu = document.querySelector('.nav__menu');
+const header__burger = document.querySelector('.nav__burger');
+const header__menu = document.querySelector('.nav__menu');
 const body = document.querySelector('body');
-const nav__list = document.querySelector('.nav__list');
-const nav = document.querySelector(".nav");
+const header__list = document.querySelector('.nav__list');
+const html = document.querySelector('html');
 
 const isiPhone = (navigator.userAgent.match(/iPhone/i) != null);
 const isiPad = (navigator.userAgent.match(/iPad/i) != null);
 const isiPod = (navigator.userAgent.match(/iPod/i) != null);
 
-nav__burger.onclick = function (e) {
+if (isiPhone || isiPad || isiPod) {
+	console.log('IPhone')
+} else {
+	console.log('Это не айфон -_-')
+}
+header__burger.onclick = function (e) {
 	if (isiPhone || isiPad || isiPod) {
-		nav__burger.classList.toggle('active');
-		nav__menu.classList.toggle('active');
-		nav.classList.toggle('active');
+		window.scrollTo(0, window.pageYOffset + 1);
+		header__burger.classList.toggle('active');
+		header__menu.classList.toggle('active');
 		body.classList.toggle('lock');
 		bodyFixPosition()
-		window.scrollTo(0, 1)
 		bodyUnfixPosition()
-		console.log('Is a IPhone')
+
 	} else {
-		nav.classList.toggle('active');
-		nav__burger.classList.toggle('active');
-		nav__menu.classList.toggle('active');
+		header__burger.classList.toggle('active');
+		header__menu.classList.toggle('active');
 		body.classList.toggle('lock');
 	}
 }
+
 if (isiPhone || isiPad || isiPod) {
 	window.addEventListener('scroll', function () {
 		if (body.classList.contains('lock')) {
+			window.scrollTo(0, window.pageYOffset + 1);
 			bodyFixPosition()
-			console.log('Fixed')
 		} else {
 			bodyUnfixPosition()
-			console.log('Unfixed')
 		}
 	})
 }
 
 function bodyFixPosition() {
 	setTimeout(function () {
-		/* Ставим необходимую задержку, чтобы не было «конфликта» в случае, если функция фиксации вызывается сразу после расфиксации (расфиксация отменяет действия расфиксации из-за одновременного действия) */
+		// Ставим необходимую задержку, чтобы не было «конфликта» в случае, если функция фиксации вызывается сразу после расфиксации (расфиксация отменяет действия расфиксации из-за одновременного действия)
 		if (!document.body.hasAttribute('data-body-scroll-fix')) {
 			// Получаем позицию прокрутки
 			let scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
 			// Ставим нужные стили
 			document.body.setAttribute('data-body-scroll-fix', scrollPosition); // Cтавим атрибут со значением прокрутки
-			document.body.style.overflow = 'hidden';
+
 			document.body.style.position = 'fixed';
 			document.body.style.top = '-' + scrollPosition + 'px';
 			document.body.style.left = '0';
 			document.body.style.width = '100%';
 		}
-	}, 15); /* Можно задержку ещё меньше, но у меня работало хорошо именно с этим значением на всех устройствах и браузерах */
+	}, 15); // Можно задержку ещё меньше, но у меня работало хорошо именно с этим значением на всех устройствах и браузерах 
 }
 
 function bodyUnfixPosition() {
@@ -79,7 +82,7 @@ function bodyUnfixPosition() {
 		// Удаляем атрибут
 		document.body.removeAttribute('data-body-scroll-fix');
 		// Удаляем ненужные стили
-		document.body.style.overflow = '';
+
 		document.body.style.position = '';
 		document.body.style.top = '';
 		document.body.style.left = '';
@@ -88,23 +91,33 @@ function bodyUnfixPosition() {
 		window.scroll(0, scrollPosition);
 	}
 }
-// Nav Scroll
-var prevScrollpos = window.pageYOffset;
+
+// scroll nav
+const nav = document.querySelector(".nav");
+let prevScrollpos = window.pageYOffset;
+
+function navOpen() {
+	if (prevScrollpos != 0) {
+		nav.classList.add('_active');
+	} else {
+		nav.classList.remove('_active');
+	}
+}
 function navScroll() {
 	window.onscroll = function () {
 		var currentScrollPos = window.pageYOffset;
 		if (prevScrollpos < currentScrollPos) {
-			nav.classList.add('nav--active');
+			nav.classList.add('_active');
 		} else if (prevScrollpos = currentScrollPos) {
-			nav.classList.add('nav--active');
+			nav.classList.add('_active');
 		} else {
-			nav.classList.remove('nav--active');
+			nav.classList.remove('_active');
 		}
 		prevScrollpos = currentScrollPos;
 	}
 }
+navOpen()
 navScroll()
-//
 
 // Swiper
 /* let swiperHeader = new Swiper('.swiper-header', {

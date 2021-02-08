@@ -120,6 +120,7 @@ html {
   min-height: 100%;
   margin: 0;
   padding: 0;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -132,13 +133,6 @@ body {
 
 .wrapper {
   height: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
 }
 
 .lock {
@@ -157,18 +151,48 @@ body {
   clip: rect(1px 1px 1px 1px);
   /* IE6, IE7 */
   clip: rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
   padding: 0 !important;
   border: 0 !important;
   height: 1px !important;
   width: 1px !important;
-  overflow: hidden;
 }
 
 .logo {
+  color: #fff;
   font-family: "Big John";
   font-weight: 700;
   font-size: 25px;
-  color: #fff;
+}
+
+.title {
+  color: #333b46;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 20px;
+}
+
+.text {
+  color: #81868e;
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
+}
+
+.link {
+  display: inline-block;
+  color: #333b46;
+  padding: 12px 30px;
+  border: 1px solid #333b46;
+  border-radius: 30px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  -webkit-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.link:hover {
+  color: #ffffff;
+  background-color: #000000;
 }
 
 .header {
@@ -244,6 +268,14 @@ body {
           transform: translateX(-50%);
   -webkit-animation: hoverWave linear 2.5s infinite;
   animation: hoverWave linear 2.5s infinite;
+  -webkit-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.header__scroll-link:hover {
+  -webkit-animation: hoverWaveBigger linear 2s infinite;
+          animation: hoverWaveBigger linear 2s infinite;
 }
 
 @-webkit-keyframes hoverWave {
@@ -288,6 +320,58 @@ body {
     -webkit-box-shadow: 0 8px 10px rgba(25, 189, 154, 0.3), 0 0 0 30px rgba(25, 189, 154, 0), 0 0 0 40px rgba(25, 189, 154, 0);
             box-shadow: 0 8px 10px rgba(25, 189, 154, 0.3), 0 0 0 30px rgba(25, 189, 154, 0), 0 0 0 40px rgba(25, 189, 154, 0);
   }
+}
+
+@-webkit-keyframes hoverWaveBigger {
+  0% {
+    -webkit-box-shadow: 0 30px 50px rgba(25, 189, 154, 0.3), 0 0 0 0 rgba(25, 189, 154, 0.2), 0 0 0 0 rgba(25, 189, 154, 0.2);
+            box-shadow: 0 30px 50px rgba(25, 189, 154, 0.3), 0 0 0 0 rgba(25, 189, 154, 0.2), 0 0 0 0 rgba(25, 189, 154, 0.2);
+  }
+
+  40% {
+    -webkit-box-shadow: 0 30px 50px rgba(25, 189, 154, 0.3), 0 0 0 50px rgba(25, 189, 154, 0.2), 0 0 0 0 rgba(25, 189, 154, 0.2);
+            box-shadow: 0 30px 50px rgba(25, 189, 154, 0.3), 0 0 0 50px rgba(25, 189, 154, 0.2), 0 0 0 0 rgba(25, 189, 154, 0.2);
+  }
+
+  80% {
+    -webkit-box-shadow: 0 30px 50px rgba(25, 189, 154, 0.3), 0 0 0 60px rgba(25, 189, 154, 0), 0 0 0 66.7px rgba(25, 189, 154, 0.067);
+            box-shadow: 0 30px 50px rgba(25, 189, 154, 0.3), 0 0 0 60px rgba(25, 189, 154, 0), 0 0 0 66.7px rgba(25, 189, 154, 0.067);
+  }
+
+  100% {
+    -webkit-box-shadow: 0 30px 50px rgba(25, 189, 154, 0.3), 0 0 0 65px rgba(25, 189, 154, 0), 0 0 0 80px rgba(25, 189, 154, 0);
+            box-shadow: 0 30px 50px rgba(25, 189, 154, 0.3), 0 0 0 65px rgba(25, 189, 154, 0), 0 0 0 80px rgba(25, 189, 154, 0);
+  }
+}
+
+@keyframes hoverWaveBigger {
+  0% {
+    -webkit-box-shadow: 0 30px 50px rgba(25, 189, 154, 0.3), 0 0 0 0 rgba(25, 189, 154, 0.2), 0 0 0 0 rgba(25, 189, 154, 0.2);
+            box-shadow: 0 30px 50px rgba(25, 189, 154, 0.3), 0 0 0 0 rgba(25, 189, 154, 0.2), 0 0 0 0 rgba(25, 189, 154, 0.2);
+  }
+
+  40% {
+    -webkit-box-shadow: 0 30px 50px rgba(25, 189, 154, 0.3), 0 0 0 50px rgba(25, 189, 154, 0.2), 0 0 0 0 rgba(25, 189, 154, 0.2);
+            box-shadow: 0 30px 50px rgba(25, 189, 154, 0.3), 0 0 0 50px rgba(25, 189, 154, 0.2), 0 0 0 0 rgba(25, 189, 154, 0.2);
+  }
+
+  80% {
+    -webkit-box-shadow: 0 30px 50px rgba(25, 189, 154, 0.3), 0 0 0 60px rgba(25, 189, 154, 0), 0 0 0 66.7px rgba(25, 189, 154, 0.067);
+            box-shadow: 0 30px 50px rgba(25, 189, 154, 0.3), 0 0 0 60px rgba(25, 189, 154, 0), 0 0 0 66.7px rgba(25, 189, 154, 0.067);
+  }
+
+  100% {
+    -webkit-box-shadow: 0 30px 50px rgba(25, 189, 154, 0.3), 0 0 0 65px rgba(25, 189, 154, 0), 0 0 0 80px rgba(25, 189, 154, 0);
+            box-shadow: 0 30px 50px rgba(25, 189, 154, 0.3), 0 0 0 65px rgba(25, 189, 154, 0), 0 0 0 80px rgba(25, 189, 154, 0);
+  }
+}
+
+.nav._active::before {
+  background-color: #7c703a;
+}
+
+.nav._active .nav__body {
+  height: 60px;
 }
 
 .nav {
@@ -387,9 +471,50 @@ body {
   height: 50px;
 }
 
+.promo__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  max-width: 850px;
+  padding-top: 80px;
+  padding-bottom: 50px;
+}
+
+.promo__info {
+  text-align: justify;
+  margin-right: 50px;
+}
+
+.promo__title {
+  padding-bottom: 50px;
+}
+
+.promo__text {
+  padding-bottom: 30px;
+  line-height: 200%;
+}
+
+.promo__image {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 200px;
+          flex: 0 0 200px;
+}
+
+.promo__img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
 @media (max-width: 991.98px) {
   .container {
-    max-width: 960px;
     padding-left: 10px;
     padding-right: 10px;
   }
@@ -401,7 +526,6 @@ body {
 
 @media (max-width: 767.98px) {
   .container {
-    max-width: 747px;
     padding-left: 10px;
     padding-right: 10px;
   }
@@ -523,7 +647,41 @@ body {
   }
 }
 
-@media (max-height: 991.98px) and (orientation: landscape) {
+@media (max-width: 479.98px) {
+  .promo__container {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+            flex-direction: column-reverse;
+  }
+
+  .promo__info {
+    margin-right: 0;
+  }
+
+  .promo__title {
+    padding-top: 20px;
+    padding-bottom: 15px;
+  }
+
+  .promo__text {
+    padding-bottom: 10px;
+  }
+
+  .promo__image {
+    -ms-flex-item-align: center;
+        align-self: center;
+  }
+
+  .promo__img {
+    width: 180px;
+    max-height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+}
+
+@media (max-height: 479.98px) and (orientation: landscape) {
   .container {
     padding-left: 30px;
     padding-right: 30px;
