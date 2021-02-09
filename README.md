@@ -1,4 +1,4 @@
-BOUNCY | Creative Agency 
+# BOUNCY | Creative Agency 
 
 GitHub Pages - https://grafit-off.github.io/bouncy/
 
