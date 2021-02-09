@@ -54,6 +54,27 @@ function navScroll() {
 }
 navOpen()
 navScroll()
+// progress
+
+let progressRadialWrap = document.querySelector(".progress");
+let progressRadial = document.querySelector(".progress__wrapper");
+let outViewPort;
+
+window.addEventListener('scroll', function scrolling() {
+	if (outViewPort == false) {
+		progressRadial.style.display = 'flex';
+		this.removeEventListener('scroll', scrolling);
+		console.log('Animation is Started')
+	} else {
+		function isElementOutViewport(el) {
+			var rect = el.getBoundingClientRect();
+			return outViewPort = rect.bottom < 0 || rect.right < 0 || rect.left > window.innerWidth || rect.top > window.innerHeight;
+		}
+		isElementOutViewport(progressRadialWrap)
+	}
+})
+
+
 
 // Swiper
 /* let swiperHeader = new Swiper('.swiper-header', {
