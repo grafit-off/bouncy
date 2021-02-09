@@ -610,13 +610,6 @@ body {
   margin-right: 130px;
 }
 
-@media (max-height: 767.98px) and (orientation: landscape) and (max-width: 1182px) {
-  .container {
-    padding-left: 60px;
-    padding-right: 60px;
-  }
-}
-
 @media (max-width: 991.98px) and (orientation: portrait) {
   .container {
     padding-left: 10px;
@@ -793,12 +786,6 @@ body {
   }
 }
 
-@media (max-height: 991.98px) and (orientation: landscape) and (max-width: 767.98px) {
-  .nav__menu {
-    padding: 70px 30px 20px 30px;
-  }
-}
-
 @media (max-width: 479.98px) {
   .promo__container {
     -webkit-box-orient: vertical;
@@ -830,6 +817,21 @@ body {
     max-height: 100%;
     -o-object-fit: cover;
        object-fit: cover;
+  }
+}
+
+@media (max-height: 479.98px) and (orientation: landscape) {
+  .container {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .nav__menu {
+    padding: 20px 30px 20px 30px;
+  }
+
+  .nav__body {
+    height: 60px;
   }
 }
 
