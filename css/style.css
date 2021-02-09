@@ -547,6 +547,8 @@ body {
   -webkit-box-flex: 0;
       -ms-flex: 0 0 200px;
           flex: 0 0 200px;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
 }
 
 .promo__img {
@@ -587,6 +589,8 @@ body {
 .details__text {
   max-width: 470px;
   margin-bottom: 60px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .details__icons {
@@ -608,8 +612,17 @@ body {
   text-align: justify;
 }
 
+.ideas__text p {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 60%;
+          flex: 0 0 60%;
+}
+
 .ideas__text p:first-child {
-  margin-right: 130px;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 40%;
+          flex: 0 0 40%;
+  padding-right: 130px;
 }
 
 .projects {
@@ -1128,8 +1141,10 @@ body {
   }
 
   .ideas__text p:first-child {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 50%;
+            flex: 0 0 50%;
     padding-right: 50px;
-    margin-right: 0px;
   }
 
   .projects__work-img {
