@@ -610,12 +610,21 @@ body {
   margin-right: 130px;
 }
 
-@media (max-width: 991.98px) {
+@media (max-height: 767.98px) and (orientation: landscape) and (max-width: 1182px) {
+  .container {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+@media (max-width: 991.98px) and (orientation: portrait) {
   .container {
     padding-left: 10px;
     padding-right: 10px;
   }
+}
 
+@media (max-width: 991.98px) {
   .nav__list li:not(:last-child) {
     margin-right: 5px;
   }
@@ -632,12 +641,14 @@ body {
   }
 }
 
-@media (max-width: 767.98px) {
+@media (max-width: 767.98px) and (orientation: portrait) {
   .container {
     padding-left: 10px;
     padding-right: 10px;
   }
+}
 
+@media (max-width: 767.98px) {
   .nav.active::before {
     background-color: #7c573f;
   }
@@ -648,7 +659,6 @@ body {
 
   .nav__logo {
     padding-top: 5px;
-    padding-left: 15px;
     padding-bottom: 0;
   }
 
@@ -820,13 +830,6 @@ body {
     max-height: 100%;
     -o-object-fit: cover;
        object-fit: cover;
-  }
-}
-
-@media (max-height: 479.98px) and (orientation: landscape) {
-  .container {
-    padding-left: 30px;
-    padding-right: 30px;
   }
 }
 
