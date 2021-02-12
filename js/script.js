@@ -148,7 +148,7 @@ let iconLink = document.querySelectorAll(".f-block__icon-link");
 
 iconLink.forEach((elem) => {
 	elem.addEventListener("click", () => {
-		elem.classList.add('active');
+		elem.classList.toggle('active');
 	})
 })
 
