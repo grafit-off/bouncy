@@ -59,21 +59,109 @@ navScroll()
 let progressRadialWrap = document.querySelector(".progress");
 let progressRadial = document.querySelector(".progress__wrapper");
 let outViewPort;
-
+function isElementOutViewport(el) {
+	var rect = el.getBoundingClientRect();
+	return outViewPort = rect.bottom < 0 || rect.right < 0 || rect.left > window.innerWidth || rect.top > window.innerHeight;
+}
+isElementOutViewport(progressRadialWrap)
 window.addEventListener('scroll', function scrolling() {
 	if (outViewPort == false) {
 		progressRadial.style.display = 'flex';
 		this.removeEventListener('scroll', scrolling);
 		console.log('Animation is Started')
 	} else {
-		function isElementOutViewport(el) {
-			var rect = el.getBoundingClientRect();
-			return outViewPort = rect.bottom < 0 || rect.right < 0 || rect.left > window.innerWidth || rect.top > window.innerHeight;
-		}
 		isElementOutViewport(progressRadialWrap)
 	}
 })
 
+
+// Portfolio Filter
+filterSelection("all")
+function filterSelection(c) {
+	var x, i;
+	x = document.getElementsByClassName("filter__block");
+	if (c == "all") c = "";
+	// Добавить класс "show" (display:block) к отфильтрованным элементам и удалите класс "show" из элементов, которые не выбраны
+	for (i = 0; i < x.length; i++) {
+		w3RemoveClass(x[i], "show");
+		if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+	}
+}
+
+// Показать отфильтрованные элементы
+function w3AddClass(element, name) {
+	var i, arr1, arr2;
+	arr1 = element.className.split(" ");
+	arr2 = name.split(" ");
+	for (i = 0; i < arr2.length; i++) {
+		if (arr1.indexOf(arr2[i]) == -1) {
+			element.className += " " + arr2[i];
+		}
+	}
+}
+
+// Скрыть элементы, которые не выбраны
+function w3RemoveClass(element, name) {
+	var i, arr1, arr2;
+	arr1 = element.className.split(" ");
+	arr2 = name.split(" ");
+	for (i = 0; i < arr2.length; i++) {
+		while (arr1.indexOf(arr2[i]) > -1) {
+			arr1.splice(arr1.indexOf(arr2[i]), 1);
+		}
+	}
+	element.className = arr1.join(" ");
+}
+
+// Добавить активный класс к текущей кнопке управления (выделите ее)
+var btnContainer = document.getElementById("filter__buttons");
+var btns = btnContainer.getElementsByClassName("filter__button");
+for (var i = 0; i < btns.length; i++) {
+	btns[i].addEventListener("click", function () {
+		var current = document.getElementsByClassName("active");
+		current[0].className = current[0].className.replace(" active", "");
+		this.className += " active";
+	});
+}
+
+// Snackbar
+
+const copyButtons = document.querySelectorAll('.f-block__copy-btn');
+let snackbar = document.querySelector('.snackbar')
+
+copyButtons.forEach(function (item) {
+	item.addEventListener('click', function (event) {
+		let copytext = document.createElement('input')
+		copytext.value = item.dataset.link
+		document.body.appendChild(copytext)
+		copytext.select()
+		document.execCommand('copy')
+		document.body.removeChild(copytext)
+		snackbar.classList.add('show-snackbar')
+		setTimeout(function () { snackbar.classList.remove('show-snackbar') }, 3000);
+	})
+})
+
+//
+let portfolioLinks = document.querySelectorAll(".f-block__image-link");
+let iconLink = document.querySelectorAll(".f-block__icon-link");
+
+iconLink.forEach((elem) => {
+	elem.addEventListener("click", () => {
+		elem.classList.add('active');
+	})
+})
+
+portfolioLinks.forEach((item) => {
+	item.addEventListener('focus', () => {
+		item.parentNode.classList.add("--active")
+	})
+	iconLink.forEach((element) => {
+		element.addEventListener('blur', () => {
+			item.parentNode.classList.remove("--active")
+		})
+	})
+})
 
 
 // Swiper
