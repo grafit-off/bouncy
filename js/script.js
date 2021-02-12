@@ -58,23 +58,50 @@ navScroll()
 
 let progressRadialWrap = document.querySelector(".progress");
 let progressRadial = document.querySelector(".progress__wrapper");
-let outViewPort;
+
+// .progress__inside-circle
+
 function isElementOutViewport(el) {
 	var rect = el.getBoundingClientRect();
-	return outViewPort = rect.bottom < 0 || rect.right < 0 || rect.left > window.innerWidth || rect.top > window.innerHeight;
+	return rect.bottom < 0 || rect.right < 0 || rect.left > window.innerWidth || rect.top > window.innerHeight;
 }
-isElementOutViewport(progressRadialWrap)
+const circleCount = document.querySelectorAll('.progress__inside-circle');
+
+if (isElementOutViewport(progressRadialWrap) == false) {
+	progressRadial.style.display = 'flex';
+	animCount(circleCount)
+}
 window.addEventListener('scroll', function scrolling() {
-	if (outViewPort == false) {
+	if (isElementOutViewport(progressRadialWrap) == false) {
 		progressRadial.style.display = 'flex';
 		this.removeEventListener('scroll', scrolling);
-		console.log('Animation is Started')
+		animCount(circleCount)
 	} else {
 		isElementOutViewport(progressRadialWrap)
 	}
 })
-
-
+function animCount(countItem) {
+	const speed = 120; // The lower the slower
+	countItem.forEach(counter => {
+		const updateCount = () => {
+			const target = +counter.getAttribute('data-max');
+			const count = +counter.innerText;
+			// Lower inc to slow and higher to slow
+			const inc = Math.round(target / speed);
+			// Check if target is reached
+			if (count < target) {
+				// Add inc to count and output in counter
+				counter.innerText = count + inc;
+				// Call function every ms
+				setTimeout(updateCount, 30);
+			} else {
+				counter.innerText = target + '%';
+			}
+		};
+		updateCount();
+	});
+	console.log('Animation is Started')
+}
 // Portfolio Filter
 filterSelection("all")
 function filterSelection(c) {
@@ -151,7 +178,6 @@ iconLink.forEach((elem) => {
 		elem.classList.toggle('active');
 	})
 })
-
 portfolioLinks.forEach((item) => {
 	item.addEventListener('focus', () => {
 		item.parentNode.classList.add("--active")
@@ -165,22 +191,22 @@ portfolioLinks.forEach((item) => {
 
 
 // Swiper
-/* let swiperHeader = new Swiper('.swiper-header', {
+let swiperTeam = new Swiper('.team-swiper__container', {
 	loop: true,
 	centeredSlides: true,
 	pagination: {
-		el: '.swiper-pagination',
+		el: '.team-swiper__pagination',
 		clickable: true,
 	},
-	navigation: {
-		nextEl: '.swiper-button-next',
-		prevEl: '.swiper-button-prev',
-	},
 	watchSlidesVisibility: true,
+	autoplay: {
+		delay: 2500,
+		disableOnInteraction: false,
+	},
 	on: {
 		init() {
 			Array.from(this.slides).forEach((swiperSlide, i) => {
-				const slide = swiperSlide.querySelector('.slider__wrapper');
+				const slide = swiperSlide.querySelector('.swiper-slide__wrapper');
 				if (!swiperSlide.classList.contains('swiper-slide-visible')) {
 					slide.style.display = 'none';
 				}
@@ -189,28 +215,28 @@ portfolioLinks.forEach((item) => {
 		setTranslate() {
 			Array.from(this.slides).forEach((slide,) => {
 				if (slide.classList.contains('swiper-slide-visible')) {
-					slide.querySelector('.slider__wrapper').style.display = '';
+					slide.querySelector('.swiper-slide__wrapper').style.display = '';
 				}
 			});
 		},
 		transitionEnd() {
 			Array.from(this.slides).forEach((slide) => {
 				if (!slide.classList.contains('swiper-slide-visible')) {
-					slide.querySelector('.slider__wrapper').style.display = 'none';
+					slide.querySelector('.swiper-slide__wrapper').style.display = 'none';
 				}
 			});
 		},
 	},
-}); */
-
-/* // Slider hover
-document.querySelector('.posts-image-slider2').addEventListener('mouseenter', () => {
-	swiperPostsInterior2.autoplay.stop()
 });
-document.querySelector('.posts-image-slider2').addEventListener('mouseleave', () => {
-	swiperPostsInterior2.autoplay.start()
-}); */
-//
+
+// Slider hover
+document.querySelector('.team-swiper__container').addEventListener('mouseenter', () => {
+	swiperTeam.autoplay.stop()
+});
+document.querySelector('.team-swiper__container').addEventListener('mouseleave', () => {
+	swiperTeam.autoplay.start()
+});
+
 /*
 // Acordion
 document.querySelectorAll('.acordion-triger').forEach((item) =>
