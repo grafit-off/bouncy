@@ -32,17 +32,7 @@ const isiPad = (navigator.userAgent.match(/iPad/i) != null);
 const isiPod = (navigator.userAgent.match(/iPod/i) != null);
 
 if (isiPhone || isiPad || isiPod) {
-	const anchors = document.querySelectorAll('a[href*="#"]')
-	for (let anchor of anchors) {
-		anchor.addEventListener('click', function (e) {
-			e.preventDefault()
-			const blockID = anchor.getAttribute('href').substr(1)
-			document.getElementById(blockID).scrollIntoView({
-				behavior: 'smooth',
-				block: 'start'
-			})
-		})
-	}
+
 }
 
 // scroll nav
@@ -212,11 +202,11 @@ iconLink.forEach((elem) => {
 })
 portfolioLinks.forEach((item) => {
 	item.addEventListener('focus', () => {
-		item.parentNode.classList.add("--active")
+		item.parentNode.classList.add("active")
 	})
 	iconLink.forEach((element) => {
 		element.addEventListener('blur', () => {
-			item.parentNode.classList.remove("--active")
+			item.parentNode.classList.remove("active")
 		})
 	})
 })
