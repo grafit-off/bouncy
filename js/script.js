@@ -54,12 +54,26 @@ function navScroll() {
 }
 navOpen()
 navScroll()
+// read more btn
+const dots = document.querySelector('.promo__dots');
+const moreText = document.querySelector('.promo__more');
+const btnText = document.querySelector('.promo__link');
+btnText.addEventListener('click', () => {
+	if (dots.style.display === "none") {
+		dots.style.display = "inline";
+		btnText.innerHTML = "Read more";
+		moreText.style.display = "none";
+	} else {
+		dots.style.display = "none";
+		btnText.innerHTML = "Read less";
+		moreText.style.display = "inline";
+	}
+})
+
 // progress
 
 let progressRadialWrap = document.querySelector(".progress");
 let progressRadial = document.querySelector(".progress__wrapper");
-
-// .progress__inside-circle
 
 function isElementOutViewport(el) {
 	var rect = el.getBoundingClientRect();
@@ -191,6 +205,7 @@ portfolioLinks.forEach((item) => {
 
 
 // Swiper
+// Slider Team
 let swiperTeam = new Swiper('.team-swiper__container', {
 	loop: true,
 	centeredSlides: true,
@@ -236,6 +251,78 @@ document.querySelector('.team-swiper__container').addEventListener('mouseenter',
 document.querySelector('.team-swiper__container').addEventListener('mouseleave', () => {
 	swiperTeam.autoplay.start()
 });
+
+
+// Slider Testimonials
+let swiperTestimonials = new Swiper('.slider-tst__container', {
+	loop: true,
+	centeredSlides: true,
+	pagination: {
+		el: '.slider-tst__pagination',
+		clickable: true,
+	},
+	watchSlidesVisibility: true,
+	on: {
+		init() {
+			Array.from(this.slides).forEach((swiperSlide, i) => {
+				const slide = swiperSlide.querySelector('.swiper-slide__wrapper');
+				if (!swiperSlide.classList.contains('swiper-slide-visible')) {
+					slide.style.display = 'none';
+				}
+			});
+		},
+		setTranslate() {
+			Array.from(this.slides).forEach((slide,) => {
+				if (slide.classList.contains('swiper-slide-visible')) {
+					slide.querySelector('.swiper-slide__wrapper').style.display = '';
+				}
+			});
+		},
+		transitionEnd() {
+			Array.from(this.slides).forEach((slide) => {
+				if (!slide.classList.contains('swiper-slide-visible')) {
+					slide.querySelector('.swiper-slide__wrapper').style.display = 'none';
+				}
+			});
+		},
+	},
+});
+
+// Slider News 
+let swiperNews = new Swiper('.news-slider ', {
+	pagination: {
+		el: '.news-slider__pagination',
+		clickable: true,
+	},
+	autoHeight: true,
+	watchSlidesVisibility: true,
+	direction: 'vertical',
+	on: {
+		init() {
+			Array.from(this.slides).forEach((swiperSlide, i) => {
+				const slide = swiperSlide.querySelector('.swiper-slide__wrapper');
+				if (!swiperSlide.classList.contains('swiper-slide-visible')) {
+					slide.style.display = 'none';
+				}
+			});
+		},
+		setTranslate() {
+			Array.from(this.slides).forEach((slide,) => {
+				if (slide.classList.contains('swiper-slide-visible')) {
+					slide.querySelector('.swiper-slide__wrapper').style.display = '';
+				}
+			});
+		},
+		transitionEnd() {
+			Array.from(this.slides).forEach((slide) => {
+				if (!slide.classList.contains('swiper-slide-visible')) {
+					slide.querySelector('.swiper-slide__wrapper').style.display = 'none';
+				}
+			});
+		},
+	},
+});
+
 
 /*
 // Acordion
