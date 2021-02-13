@@ -32,7 +32,29 @@ const isiPad = (navigator.userAgent.match(/iPad/i) != null);
 const isiPod = (navigator.userAgent.match(/iPod/i) != null);
 
 if (isiPhone || isiPad || isiPod) {
-
+	let linkNav = document.querySelectorAll('[href^="#"]'), //выбираем все ссылки к якорю на странице
+		V = 0.2;  // скорость, может иметь дробное значение через точку (чем меньше значение - тем больше скорость)
+	for (let i = 0; i < linkNav.length; i++) {
+		linkNav[i].addEventListener('click', function (e) { //по клику на ссылку
+			e.preventDefault(); //отменяем стандартное поведение
+			let w = window.pageYOffset,  // производим прокрутка прокрутка
+				hash = this.href.replace(/[^#]*(.*)/, '$1');  // к id элемента, к которому нужно перейти
+			t = document.querySelector(hash).getBoundingClientRect().top,  // отступ от окна браузера до id
+				start = null;
+			requestAnimationFrame(step);  // подробнее про функцию анимации [developer.mozilla.org]
+			function step(time) {
+				if (start === null) start = time;
+				let progress = time - start,
+					r = (t < 0 ? Math.max(w - progress / V, w + t) : Math.min(w + progress / V, w + t));
+				window.scrollTo(0, r);
+				if (r != w + t) {
+					requestAnimationFrame(step)
+				} else {
+					location.hash = hash  // URL с хэшем
+				}
+			}
+		}, false);
+	}
 }
 
 // scroll nav
@@ -49,7 +71,7 @@ function navOpen() {
 
 function navScroll() {
 	window.onscroll = function () {
-		var currentScrollPos = window.pageYOffset;
+		let currentScrollPos = window.pageYOffset;
 		if (prevScrollpos < currentScrollPos) {
 			nav.classList.add('_active');
 		} else if (prevScrollpos = currentScrollPos) {
@@ -84,7 +106,7 @@ let progressRadialWrap = document.querySelector(".progress");
 let progressRadial = document.querySelector(".progress__wrapper");
 
 function isElementOutViewport(el) {
-	var rect = el.getBoundingClientRect();
+	let rect = el.getBoundingClientRect();
 	return rect.bottom < 0 || rect.right < 0 || rect.left > window.innerWidth || rect.top > window.innerHeight;
 }
 const circleCount = document.querySelectorAll('.progress__inside-circle');
@@ -127,7 +149,7 @@ function animCount(countItem) {
 // Portfolio Filter
 filterSelection("all")
 function filterSelection(c) {
-	var x, i;
+	let x, i;
 	x = document.getElementsByClassName("filter__block");
 	if (c == "all") c = "";
 	// Добавить класс "show" (display:block) к отфильтрованным элементам и удалите класс "show" из элементов, которые не выбраны
@@ -139,7 +161,7 @@ function filterSelection(c) {
 
 // Показать отфильтрованные элементы
 function w3AddClass(element, name) {
-	var i, arr1, arr2;
+	let i, arr1, arr2;
 	arr1 = element.className.split(" ");
 	arr2 = name.split(" ");
 	for (i = 0; i < arr2.length; i++) {
@@ -151,7 +173,7 @@ function w3AddClass(element, name) {
 
 // Скрыть элементы, которые не выбраны
 function w3RemoveClass(element, name) {
-	var i, arr1, arr2;
+	let i, arr1, arr2;
 	arr1 = element.className.split(" ");
 	arr2 = name.split(" ");
 	for (i = 0; i < arr2.length; i++) {
@@ -163,11 +185,11 @@ function w3RemoveClass(element, name) {
 }
 
 // Добавить активный класс к текущей кнопке управления (выделите ее)
-var btnContainer = document.getElementById("filter__buttons");
-var btns = btnContainer.getElementsByClassName("filter__button");
-for (var i = 0; i < btns.length; i++) {
+let btnContainer = document.getElementById("filter__buttons");
+let btns = btnContainer.getElementsByClassName("filter__button");
+for (let i = 0; i < btns.length; i++) {
 	btns[i].addEventListener("click", function () {
-		var current = document.getElementsByClassName("active");
+		let current = document.getElementsByClassName("active");
 		current[0].className = current[0].className.replace(" active", "");
 		this.className += " active";
 	});
