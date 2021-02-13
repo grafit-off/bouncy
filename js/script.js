@@ -27,6 +27,24 @@ header__burger.onclick = function (e) {
 	body.classList.toggle('lock');
 }
 
+const isiPhone = (navigator.userAgent.match(/iPhone/i) != null);
+const isiPad = (navigator.userAgent.match(/iPad/i) != null);
+const isiPod = (navigator.userAgent.match(/iPod/i) != null);
+
+if (isiPhone || isiPad || isiPod) {
+	const anchors = document.querySelectorAll('a[href*="#"]')
+	for (let anchor of anchors) {
+		anchor.addEventListener('click', function (e) {
+			e.preventDefault()
+			const blockID = anchor.getAttribute('href').substr(1)
+			document.getElementById(blockID).scrollIntoView({
+				behavior: 'smooth',
+				block: 'start'
+			})
+		})
+	}
+}
+
 // scroll nav
 const nav = document.querySelector(".nav");
 let prevScrollpos = window.pageYOffset;
@@ -323,6 +341,27 @@ let swiperNews = new Swiper('.news-slider ', {
 	},
 });
 
+
+// contact Map
+
+const btnMap = document.querySelector('.map__btn')
+const mapAnimetion = document.querySelector('.map__animation')
+const mapBody = document.querySelector('.map__body')
+const mapField = document.querySelector('.map__field')
+function turnMap() {
+	btnMap.classList.add('map__btn--hidden')
+	mapAnimetion.classList.add('active')
+	setTimeout(() => {
+		mapAnimetion.classList.remove('active')
+		mapBody.classList.add('map__body--active')
+	}, 1000)
+}
+mapField.addEventListener('click', () => {
+	turnMap()
+})
+btnMap.addEventListener('click', () => {
+	turnMap()
+})
 
 /*
 // Acordion
