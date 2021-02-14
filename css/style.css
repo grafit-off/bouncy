@@ -2546,6 +2546,10 @@ body {
           filter: grayscale(100%) brightness(15%);
 }
 
+.map:hover .map__btn {
+  color: #19bd9a;
+}
+
 .map__btn {
   position: absolute;
   top: 50%;
