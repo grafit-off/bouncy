@@ -374,11 +374,3 @@ mapField.addEventListener('click', () => {
 btnMap.addEventListener('click', () => {
 	turnMap()
 })
-
-/*
-// Acordion
-document.querySelectorAll('.acordion-triger').forEach((item) =>
-	item.addEventListener('click', () => {
-		item.parentNode.classList.toggle('acordion--active');
-	})
-) */
